@@ -1,0 +1,33 @@
+
+ <li class="dropdown dropdown-user" (clickOutside)="exibir.usuario = false">	
+    <a class="nav-link dropdown-toggle link user" data-toggle="dropdown" (click)="exibir.usuario = !exibir.usuario">	
+        <img src="{{usuario.avatar}}" alt="{{usuario.nome}}" *ngIf="usuario.avatar" />	
+        <img src="/assets/img/usuario.png" alt="{{usuario.nome}}" *ngIf="!usuario.avatar" />	
+    </a>	
+    <div class="dropdown-menu dropdown-arrow dropdown-menu-right admin-dropdown-menu" [ngClass]="{'show': exibir.usuario}">	
+        <div class="dropdown-arrow"></div>	
+        <div class="dropdown-header">	
+            <div class="admin-avatar">	
+                <img src="{{usuario.avatar}}" alt="{{usuario.nome}}" *ngIf="usuario.avatar" />	
+                <img src="/assets/img/usuario.png" alt="{{usuario.nome}}" *ngIf="!usuario.avatar" />	
+            </div>	
+            <div>	
+                <h5 class="font-strong text-white">{{usuario.nome}}</h5>	
+                <div>	
+                    {{usuario.email}}	
+                </div>	
+            </div>	
+        </div>	
+        <div class="admin-menu-features">	
+            <a class="admin-features-item" [routerLink]="[ '', 'conta', 'editar-dados' ]" (click)="exibir.usuario = false"><i class="fa fa-user"></i>	
+                <span>EDITAR DADOS</span>	
+            </a>	
+            <a class="admin-features-item" [routerLink]="[ '', 'conta', 'alterar-senha' ]" (click)="exibir.usuario = false"><i class="fa fa-lock"></i>	
+                <span>ALTERAR SENHA</span>	
+            </a>	
+            <a class="admin-features-item" [routerLink]="['', 'sair']"><i class="fa fa-arrow-right"></i>	
+                <span>SAIR</span>	
+            </a>	
+        </div>	
+    </div>	
+</li> 

@@ -1,0 +1,26 @@
+    <ul class="pagination">
+      <li class="page-item" *ngIf="page > 1"><a href="javascript:void(0)" (click)="changePage(page-1)"
+          class="page-link">Anterior</a>
+      </li>
+      <li class="page-item" *ngIf="page > 2"><a href="javascript:void(0)" id="firstPage" (click)="changePage(1)"
+          class="page-link">1</a>
+      </li>
+      <li class="page-item" *ngIf="page > 4" class="hidden-phone"><span class="page-interval">...</span></li>
+      <li class="page-item" *ngIf="page == 4"><a href="javascript:void(0)" (click)="changePage(page-1)"
+          class="page-link">{{page-2}}</a>
+      </li>
+      <li class="page-item" *ngIf="page > 1"><a href="javascript:void(0)" (click)="changePage(page-1)"
+          class="page-link">{{page-1}}</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="javascript:void(0)">{{page}}</a></li>
+      <li class="page-item" *ngIf="pages > (page + 1)"><a href="javascript:void(0)" (click)="changePage(page+1)"
+          class="page-link">{{page+1}}</a></li>
+      <li class="page-item" *ngIf="pages == (page + 3)"><a href="javascript:void(0)" (click)="changePage(page+1)"
+          class="page-link">{{page+2}}</a></li>
+      <li class="page-item" *ngIf="pages > (page + 3)" class="hidden-phone"><span class="page-link">...</span></li>
+      <li class="page-item" *ngIf="pages > page"><a href="javascript:void(0)" id="lastPage" (click)="changePage(pages)"
+          class="page-link">{{pages}}</a></li>
+      <li class="page-item" *ngIf="pages > page"><a href="javascript:void(0)" (click)="changePage(page+1)"
+          class="page-link ">Próximo</a>
+      </li>
+    </ul>

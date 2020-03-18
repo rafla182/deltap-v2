@@ -1,0 +1,31 @@
+<h4 class="font-strong text-center mb-5">
+    CADASTRO</h4>
+<div class="form-group mb-4">
+</div>
+<div class="divisao">
+    <hr />
+    <div class="ou">ou</div>
+</div>
+<div (keyup.enter)="cadastrar()">
+    <div class="form-group mb-4">
+        <input class="form-control" type="text" placeholder="Nome" [(ngModel)]="model.nome">
+    </div>
+    <div class="form-group mb-4" [ngClass]="{'has-error': erro.email}">
+        <input class="form-control" type="email" placeholder="E-mail" [(ngModel)]="model.email" (focus)="exibirConfirmarEmail()">
+    </div>
+    <div class="form-group mb-4" [ngClass]="{'has-error': erro.confirmarEmail}" *ngIf="exibir.confirmarEmail">
+        <input class="form-control" type="email" placeholder="Confirme seu e-mail" [(ngModel)]="model.confirmarEmail" id="confirmarEmail">
+    </div>
+    <div class="form-group mb-4" [ngClass]="{'has-error': erro.senha}">
+        <input class="form-control" type="password" placeholder="Senha" [(ngModel)]="model.senha" (focus)="exibirConfirmarSenha()">
+    </div>
+    <div class="form-group mb-4" [ngClass]="{'has-error': erro.confirmarSenha}" *ngIf="exibir.confirmarSenha">
+        <input class="form-control" type="password" placeholder="Confirme sua senha" [(ngModel)]="model.confirmarSenha" id="confirmarSenha">
+    </div>
+    <div class="text-center">
+        <button class="btn btn-blue btn-block text-uppercase" (click)="cadastrar()">Cadastrar</button>
+    </div>
+</div>
+<div class="cadastro">
+    <a [routerLink]="['', 'login']">Ir para o login.</a>
+</div>

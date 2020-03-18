@@ -1,0 +1,54 @@
+input {
+    height: 44px;
+    border-color: #ccc;
+    padding: 10px;
+}
+
+.btn-labeled-left {
+    padding-left: 65px;
+}
+
+.btn-label {
+    width: 50px;
+}
+
+.btn-facebook {
+    background: #3c5a99;
+    border-color: #3c5a99;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.btn-google {
+    background: #4285f4;
+    border-color: #4285f4;
+    height: 50px;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-content {
+    width: 400px;
+}
+
+.cadastro {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.divisao {
+    position: relative;
+    margin: 30px 0;
+}
+
+.ou {
+    position: absolute;
+    background: #fff;
+    top: -10px;
+    width: 40px;
+    left: 140px;
+    text-align: center;
+}

@@ -1,0 +1,106 @@
+  <div class="row">
+    <div class="col-md-12 filtro-loja">
+      <div class="label-select">
+        Você está visualizando as estatísticas da loja:
+      </div>
+      <div>
+        <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+          (change)="selecionarLoja($event)">
+          <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
+        </select>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="vendaDiariaPorLojaData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-8">
+              <h4 class="card-title mb-0">VENDA DIÁRIA POR LOJA (LOJA1)</h4>
+              <!-- <div class="small text-muted">{{mes}}</div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <select class="form-control select-mes-2" [(ngModel)]="mesSelect" (change)="selectMes($event)"
+                [ngModelOptions]="{standalone: true}">
+                <option [value]="1">Janeiro</option>
+                <option [value]="2">Fevereiro</option>
+                <option [value]="3">Março</option>
+                <option [value]="4">Abril</option>
+                <option [value]="5">Maio</option>
+                <option [value]="6">Junho</option>
+                <option [value]="7">Julho</option>
+                <option [value]="8">Agosto</option>
+                <option [value]="9">Setembro</option>
+                <option [value]="10">Outubro</option>
+                <option [value]="11">Novembro</option>
+                <option [value]="12">Dezembro</option>
+              </select>
+            </div>
+            <div class="col-sm-12 col-md-12">
+              <table class="tabela-acumulado">
+                <thead>
+                  <tr>
+                    <th scope="col">ACUMULADO DO MÊS</th>
+                    <th scope="col">MÉDIA DIÁRIA</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> {{ vendasDiariaAcumulado | currency:'BRL':true}}</td>
+                    <td>{{vendasDiariasMedia  | currency:'BRL':true}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="chart-wrapper">
+            <canvas baseChart [datasets]="vendaDiariaPorLojaData" [labels]="vendaDiariaPorLojaLabels"
+              [options]="vendaDiariaPorLojaOptions" [colors]="vendaDiariaPorLojaColors"
+              [legend]="vendaDiariaPorLojaLegenda" [chartType]="vendaDiariaPorLojaTipo"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="vendasPorMesData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-8">
+              <h4 class="card-title mb-0">VENDA MENSAL POR LOJA </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <table class="tabela-acumulado">
+                <thead>
+                  <tr>
+                    <th scope="col">ACUMULADO DO ANO</th>
+                    <th scope="col">MÉDIA MENSAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> {{vendasMesAcumulado  | currency:'BRL':true}}</td>
+                    <td>{{ vendasMesMedia | currency:'BRL':true}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="margin-top:20px;">
+            <canvas baseChart [datasets]="vendasPorMesData" [labels]="vendasPorMesLabels" [options]="vendasMesOptions"
+              [colors]="vendasPorMesColors" [legend]="vendasPorMesLegenda" [chartType]="vendasMesTipo"></canvas>
+          </div>
+          <div class="col-sm-12 col-md-12">
+            <div class="box-meta text-right">
+              META {{metaLoja  | currency:'BRL':true}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

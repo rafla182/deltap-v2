@@ -1,0 +1,58 @@
+@media screen and (max-width: 480px) {
+    .modal-notificacao {
+        right: -85px;
+    } 
+
+    .dropdown-menu.dropdown-menu-right.modal-notificacao .dropdown-arrow {
+        right: 72px !important;
+    }
+
+    .envelope-badge {
+        right: 0 !important;
+        z-index: 9;
+        top: 4px !important;
+    }
+
+    .dropdown-header a {
+        display: block !important;
+        align-items: center !important;
+        padding: 0 !important;
+    }
+
+    .dropdown-menu-media {
+        min-width: 350px;
+    }
+}
+
+.dropdown-menu.dropdown-menu-right .dropdown-arrow {
+    right: 3px;
+}  
+
+.dropdown-header a {
+    display: block;
+    align-items: center;
+    padding: 0;
+}
+
+li.timeline-item a {
+    padding: 0 !important;
+}
+
+.timeline {
+    height: 320px;
+    overflow: auto;
+}
+
+.scroll-notificacao {
+    padding-right: 2px !important;
+}
+
+.fa-bell {
+    font-size: 22px;
+    padding-top: 3px;
+}
+
+.envelope-badge {
+    top: 3px;
+    right: 13px
+}

@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Cadastrar Lojas <span *ngIf="modelCadastrar.id > 0"
+          class="badge badge-pill badge-warning">Edição</span>
+        <span *ngIf="modelCadastrar.id == 0 || !modelCadastrar.id" class="badge badge-pill badge-success">Novo</span>
+      </div>
+      <div class="card-body">
+        <form name="form">
+          <div class="form-group">
+            <label for="nome">Loja / Equipe</label>
+            <input type="text" class="form-control" name="nome" [(ngModel)]="modelCadastrar.nome" #nome="ngModel"
+              [ngClass]="{ 'is-invalid': error }" (input)="digitandoNome($event.target.value)" required />
+            <div *ngIf="error" class="invalid-feedback">
+              <div *ngIf="error">Nome é obrigatório.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="metaMensal">Meta de Vendas (R$)</label>
+            <input currencyMask class="form-control" name="metaMensal" [(ngModel)]="modelCadastrar.metaMensal"
+              #metaMensal="ngModel" required />
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <select  class="form-control" [(ngModel)]="empresaSelecionada.id" name="empresas">
+              <option [ngValue]="0">-- Selecione --</option>
+              <option *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nome}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
+              <div class="form-check">
+                <input cclass="form-check-input" type="checkbox" name="master" [(ngModel)]="modelCadastrar.master"
+                  #master="ngModel"  /> &nbsp;                
+                <label class="form-check-label" for="master"> Matriz </label>
+              </div>
+          </div> -->
+          <div class="form-group">
+            <button (click)="salvar()" class="btn  btn-primary"><i class="fa fa-save"></i>
+              Salvar</button>&nbsp;
+            <button class="btn btn-danger" (click)="limpar()"><i class="fa fa-ban"></i> Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Lojas
+        <select class="form-control" [(ngModel)]="empresaFilterSelecionada.id" [ngModelOptions]="{standalone: true}"
+          (change)="selecionarEmpresa($event)">
+          <option [value]="0">-- Selecione uma Empresa --</option>
+          <option *ngFor="let empresaFilter of empresasFilter" [value]="empresaFilter.id">{{empresaFilter.nome}}</option>
+        </select>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Meta Mensal</th>
+              <th>Empresa</th>
+              <th>Status</th>
+              <th>Matriz</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let loja of model.lojas; let i=index">
+              <td>{{loja.id}}</td>
+              <td>{{loja.nome}}</td>
+              <td>{{loja.metaMensal  | currency:'BRL':true}}</td>
+              <td>{{loja.empresa.nome}}</td>
+              <td><span [ngClass]="{'badge-success': loja.ativo, 'badge-danger': !loja.ativo}"
+                  class="badge">{{loja.ativo ? 'Ativo' : 'Inativo'}}</span>
+              </td>
+              <td><span [ngClass]="{'badge-success': loja.master, 'badge-danger': !loja.master}"
+                    class="badge">{{loja.master ? 'Sim' : 'Não'}}</span>
+              </td>
+              <td>
+                <i (click)="ativarDesativar(loja.id)" class="fa" [ngClass]="{'fa-check text-success': !loja.ativo, 'fa-ban text-danger': loja.ativo}" style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i (click)="visualizar(loja.id)" class="fa fa-edit" style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i (click)="excluir(loja.id)" class="fa fa-close" style="color:Red; font-size:20px;"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+        </app-pagination> -->
+      </div>
+    </div>
+  </div>
+</div>

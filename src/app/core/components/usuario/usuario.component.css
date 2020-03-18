@@ -1,0 +1,51 @@
+@media screen and (max-width: 480px) {	
+    .dropdown-user .admin-dropdown-menu {	
+        width: 350px;	
+        right: -3px;	
+    }	
+
+     .dropdown-menu.dropdown-menu-right .dropdown-arrow {	
+        right: -4px !important;	
+    }  	
+
+     .nav-link {	
+        padding: .5rem 0 !important;	
+    }	
+
+     .dropdown-menu .dropdown-arrow {	
+        width: 37px;	
+    }	
+
+     .dropdown-menu .dropdown-arrow:after {	
+        right: 11px;	
+    }	
+
+     a.nav-link.dropdown-toggle.link.user {	
+        padding: 8px 0 8px 5px !important;	
+    }	
+
+     li a i {	
+        color: #71808f !important;	
+        font-size: 30px !important;	
+    }	
+
+     li a {	
+        display: block !important;	
+        align-items: center !important;	
+        padding: 0 !important;	
+    }	
+}	
+
+ a.nav-link.dropdown-toggle.link.user {	
+    padding: 9px;	
+}	
+
+ li a i {	
+    color: #71808f !important;	
+}	
+
+ li a {	
+    display: block;	
+    align-items: center;	
+    padding: 0;	
+} 	

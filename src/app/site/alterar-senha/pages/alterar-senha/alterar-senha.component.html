@@ -1,0 +1,35 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <strong>Novo Usuário</strong>
+        </div>
+        <div class="card-body">
+          <form name="form" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+            <div class="form-group">
+              <label for="senhaAntiga">Senha Antiga</label>
+              <input type="password" class="form-control" name="senhaAntiga" [(ngModel)]="model.senhaAntiga" />
+            </div>
+            <div class="form-group">
+              <label for="senhaNova">Senha Nova</label>
+              <input type="password" class="form-control" name="senhaNova" [(ngModel)]="model.senhaNova"
+                #senha="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && senha.invalid }" required minlength="6" />
+              <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+                <div *ngIf="senha.errors.required">Senha é obrigatório.</div>
+                <div *ngIf="senha.errors.minlength">Senha inválida. A senha tem que ter no minimo 6 caracteres.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn  btn-primary"><i class="fa fa-save"></i>
+                Salvar</button>&nbsp;
+              <button (click)="limpar()" class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

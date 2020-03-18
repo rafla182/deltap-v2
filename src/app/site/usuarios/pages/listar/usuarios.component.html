@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Cadastrar Usuário <span *ngIf="modelCadastrar.id > 0"
+          class="badge badge-pill badge-warning">Edição</span>
+        <span *ngIf="modelCadastrar.id == 0 || !modelCadastrar.id" class="badge badge-pill badge-success">Novo</span>
+      </div>
+      <div class="card-body">
+        <form name="form" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" name="nome" [(ngModel)]="modelCadastrar.nome" #nome="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" required />
+            <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+              <div *ngIf="nome.errors.required">Nome é obrigatório.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="modelCadastrar.email" #email="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email é obrigatório.</div>
+              <div *ngIf="email.errors.email">Email é inválido.</div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="!(modelCadastrar.id > 0)">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" name="senha" [(ngModel)]="modelCadastrar.senha" #senha="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && senha.invalid }" required minlength="6" />
+            <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+              <div *ngIf="senha.errors.required">Senha é obrigatório.</div>
+              <div *ngIf="senha.errors.minlength">Senha inválida. A senha tem que ter no minimo 6 caracteres.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <select class="form-control" [(ngModel)]="empresaSelecionada.id" [ngModelOptions]="{standalone: true}"
+              (change)="selecionarEmpresa($event)">
+              <option [value]="0">-- Selecione --</option>
+              <option *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nome}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Lojas</label>
+            <!-- <ng-multiselect-dropdown [placeholder]="'-- Selecione --'" [data]="dropdownList" [(ngModel)]="selectedItems"
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" [ngModelOptions]="{standalone: true}"
+              (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown> -->
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn  btn-primary"><i class="fa fa-save"></i>
+              Salvar</button>&nbsp;
+            <button (click)="limpar()" class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Usuários
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Empresa</th>
+              <th>Lojas</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of model.usuarios; let i=index">
+              <td>{{usuario.id}}</td>
+              <td>{{usuario.nome}}</td>
+              <td>{{usuario.email}}</td>
+              <td>{{usuario.lojas[0].empresa.nome}}</td>
+              <td><span *ngFor="let item of usuario.lojas">{{item.nome}}<br></span> </td>
+              <td><span [ngClass]="{'badge-success': usuario.ativo, 'badge-danger': !usuario.ativo}"
+                  class="badge">{{usuario.ativo ? 'Ativo' : 'Inativo'}}</span></td>
+              <td>
+                <i (click)="ativarDesativar(usuario.id)" class="fa"
+                  [ngClass]="{'fa-check text-success': !usuario.ativo, 'fa-ban text-danger': usuario.ativo}"
+                  style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i (click)="visualizar(usuario.id)" class="fa fa-edit"
+                  style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i (click)="permissoes(usuario.id)" class="fas fa-user-tag"
+                  style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i (click)="excluir(usuario.id)" class="fa fa-close" style="color:Red; font-size:20px;"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+        </app-pagination> -->
+      </div>
+    </div>
+  </div>
+</div>

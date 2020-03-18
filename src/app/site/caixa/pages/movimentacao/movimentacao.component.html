@@ -1,0 +1,111 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Lançamento {{ data }} <span *ngIf="modelMovimentacao.id > 0"
+          class="badge badge-pill badge-warning">Edição</span>
+        <span *ngIf="modelMovimentacao.id == 0 || !modelMovimentacao.id"
+          class="badge badge-pill badge-success">Novo</span>
+      </div>
+      <div class="card-body">
+        <form name="form" #f="ngForm" novalidate>
+          <div class="form-group">
+            <label for="usuario">Lançado por</label>
+            <input type="text" class="form-control" name="nome" [(ngModel)]="modelMovimentacao.usuario.nome"
+              [disabled]="true" />
+          </div>
+          <div class="form-group">
+            <label for="usuario">Loja</label>
+            <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+              (change)="selecionarLoja($event)">
+              <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="usuario">Data</label>
+            <input class="form-control" id="date-input" type="text" bsDatepicker [bsConfig]="datePickerConfig"
+              [(bsValue)]="modelMovimentacao.data" (ngModelChange)="listar()"
+              placement="bottom" [ngModel]="modelMovimentacao.data" name="data" placeholder="Data">
+          </div>
+          <div class="form-group">
+            <label for="valor">Valor (R$)</label>
+            <input currencyMask class="form-control" name="valor" [(ngModel)]="modelMovimentacao.valor" #valor="ngModel"
+              required />
+          </div>
+          <div class="form-group">
+            <label>Vendedor</label>
+            <select class="form-control" [(ngModel)]="vendedorSelecionado.id" [ngModelOptions]="{standalone: true}">
+              <option [ngValue]="0">-- Selecione --</option>
+              <option *ngFor="let vendedor of vendedores" [value]="vendedor.id">{{vendedor.nome}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Forma Pagamento</label>
+            <select class="form-control" [(ngModel)]="formaPagamentoSelecionado.id"
+              [ngModelOptions]="{standalone: true}">
+              <option [ngValue]="0">-- Selecione --</option>
+              <option *ngFor="let formaPagamento of formaPagamentos" [value]="formaPagamento.id">
+                {{formaPagamento.nome}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button (click)="salvar()" class="btn  btn-primary"><i class="fa fa-save"></i>
+              Salvar</button>&nbsp;
+            <button (click)="limpar()" class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Lançamentos do dia  {{ data }}
+        <span class="badge badge-success float-right" style="font-size: 18px;">{{soma | currency:'BRL'}}</span>
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Vendedor
+                <div style="display: inline;">
+                  <i class="fas fa-chevron-up" *ngIf=" !mostrar.vendedorAsc" (click)="ordenarVendedorAsc()"></i>
+                  <i class="fas fa-chevron-down" *ngIf="mostrar.vendedorAsc" (click)="ordenarVendedorAsc()"></i>
+                </div>
+              </th>
+
+              <th>Valor</th>
+              <th>Forma de Pagamento
+                <div style="display: inline;">
+                  <i class="fas fa-chevron-up" *ngIf=" !mostrar.pagamentoAsc" (click)="ordenarFormaPagamentoAsc()"></i>
+                  <i class="fas fa-chevron-down" *ngIf="mostrar.pagamentoAsc" (click)="ordenarFormaPagamentoAsc()"></i>
+                </div>
+              </th>
+              <th>Lançado por</th>
+              <th>Data/Hora</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lancamento of model.lancamentos; let i=index">
+              <td>{{lancamento.id}}</td>    
+              <td>{{lancamento.vendedor.nome}}</td>
+              <td>{{lancamento.valor | currency:'BRL':true}}</td>
+              <td>{{lancamento.formaPagamento.nome}}</td>
+              <td>{{lancamento.usuario.nome}}</td>
+              <td>{{lancamento.data | dateFormatHour }}</td>
+              <td>
+                <i (click)="visualizar(lancamento.id)" class="fa fa-eye"
+                  style="font-size:20px;padding-left:5px;cursor: pointer;">&nbsp;&nbsp;</i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+        </app-pagination> -->
+      </div>
+    </div>
+  </div>
+</div>

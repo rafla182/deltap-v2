@@ -1,0 +1,49 @@
+/* TOAST */
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
+
+#toasta.toasta-position-bottom-fullwidth,
+#toasta.toasta-position-bottom-fullwidth .toast {
+    width: 100% !important; 
+    bottom: 0;
+    margin: 0;
+}
+
+#toasta.toasta-position-bottom-fullwidth .toast,
+#toasta.toasta-position-top-fullwidth .toast,
+#toasta.toasta-position-top-fullwidth {
+    top: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#toasta .toast .toast-text {
+    padding: 5px 20px;
+  }
+
+#toasta .toast .toast-text .toast-title {
+    font-family: Poppins;
+    font-size: 20px !important;
+    font-weight: 100 !important;
+}
+
+#toasta .toast {
+    height: 90px;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  #toasta .toast .close-button {
+    width: 40px;
+    height: 40px;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAMFBMVEUAAAD///////////////////////////////////////////////////////////87TQQwAAAAD3RSTlMAAgMGDxAXgI+Rl7nO6eszn3yJAAAA10lEQVQokV3RrRHCQBTE8Q0BEaqIj0Egr4g0kB7oADogaER6oAEEMzgmCk0dfC4id8nbd/LNz9x/gfkK8tYA0Fzklt9qYPH4CA28Aw1pad7zW2NLWhpIblDQ0rwnnwA6SwPJFhCaoNAELZ2goROcqIUjtTBRhZEqHOjVQaAj6eBAPYy0dcclyZe7IVC7pl/rBBF6mvfkz9NA8tApHX6ta6U8QlMeoWMeQ6eOhpqOI7XBRyrBI9VlInXLDHSvwQuSO1QueMd3idlZlyl4AlC5ZY4lgExvyIA/Gu76hwzmhpMAAAAASUVORK5CYII=") !important;
+    margin: 22px 20px;
+  }
+
+  #toasta .toast.toasta-theme-default .close-button:after {
+    content: '';
+  }
+
+  #toasta .toast.toasta-theme-default.toasta-type-success {
+    background-color: #4caf50;
+    background-image: none !important;
+  }

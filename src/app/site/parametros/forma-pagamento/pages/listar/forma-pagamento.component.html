@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Cadastrar Forma de Pagamento <span *ngIf="modelCadastrar.id > 0"
+          class="badge badge-pill badge-warning">Edição</span>
+        <span *ngIf="modelCadastrar.id == 0 || !modelCadastrar.id" class="badge badge-pill badge-success">Novo</span>
+      </div>
+      <div class="card-body">
+        <form name="form">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" name="nome" [(ngModel)]="modelCadastrar.nome" #nome="ngModel"
+              [ngClass]="{ 'is-invalid': error }" (input)="digitandoNome($event.target.value)" required />
+            <div *ngIf="error" class="invalid-feedback">
+              <div *ngIf="error">Nome é obrigatório.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button (click)="salvar()" class="btn  btn-primary"><i class="fa fa-save"></i>
+              Salvar</button>&nbsp;
+            <button class="btn btn-danger" (click)="limpar()"><i class="fa fa-ban"></i> Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Formas de Pagamentos
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let formaPagamento of model.formasPagamento; let i=index">
+              <td>{{formaPagamento.id}}</td>
+              <td>{{formaPagamento.nome}}</td>
+              <td><span [ngClass]="{'badge-success': formaPagamento.ativo, 'badge-danger': !formaPagamento.ativo}"
+                  class="badge">{{formaPagamento.ativo ? 'Ativo' : 'Inativo'}}</span></td>
+              <td>
+                <i (click)="visualizar(formaPagamento.id)" class="fa fa-edit"
+                  style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i (click)="excluir(formaPagamento.id)" class="fa fa-close" style="color:Red; font-size:20px;"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+        </app-pagination> -->
+      </div>
+    </div>
+  </div>

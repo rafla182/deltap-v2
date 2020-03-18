@@ -1,0 +1,63 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <strong>Novo Usuário</strong>
+        </div>
+        <div class="card-body">
+          <form name="form" (ngSubmit)="f.form.valid && salvar()" #f="ngForm" novalidate>
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" class="form-control" name="nome" [(ngModel)]="model.nome" #nome="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" required />
+              <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                <div *ngIf="nome.errors.required">Nome é obrigatório.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+              <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                <div *ngIf="email.errors.required">Email é obrigatório.</div>
+                <div *ngIf="email.errors.email">Email é inválido.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Senha</label>
+              <input type="password" class="form-control" name="senha" [(ngModel)]="model.senha" #senha="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && senha.invalid }" required minlength="6" />
+              <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+                <div *ngIf="senha.errors.required">Senha é obrigatório.</div>
+                <div *ngIf="senha.errors.minlength">Senha inválida. A senha tem que ter no minimo 6 caracteres.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Empresa</label>
+              <select class="form-control" [(ngModel)]="empresaSelecionada.id" [ngModelOptions]="{standalone: true}"
+                (change)="selecionarEmpresa($event)">
+
+                <option [ngValue]="0">-- Selecione --</option>
+                <option *ngFor="let empresa of empresas" [value]="empresa.id">{{empresa.nome}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Lojas</label>
+              <!-- <ng-multiselect-dropdown [placeholder]="'-- Selecione --'" [data]="dropdownList"
+                [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                [ngModelOptions]="{standalone: true}" (onSelectAll)="onSelectAll($event)">
+              </ng-multiselect-dropdown> -->
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn  btn-primary"><i class="fa fa-save"></i>
+                Salvar</button>&nbsp;
+              <button (click)="limpar()" class="btn btn-danger"><i class="fa fa-ban"></i> Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-sm-4 col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Cadastrar Vendedor <span *ngIf="modelCadastrar.id > 0"
+          class="badge badge-pill badge-warning">Edição</span>
+        <span *ngIf="modelCadastrar.id == 0 || !modelCadastrar.id" class="badge badge-pill badge-success">Novo</span>
+      </div>
+      <div class="card-body">
+        <form name="form" #f="ngForm" novalidate>
+          <div class="form-group">
+            <label for="loja">Loja</label>
+            <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+              (change)="selecionarLoja($event)">
+              <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" name="nome" [(ngModel)]="modelCadastrar.nome" #nome="ngModel"
+              [ngClass]="{ 'is-invalid': error }" (input)="digitandoNome($event.target.value)" required />
+            <div *ngIf="error" class="invalid-feedback">
+              <div *ngIf="error">Nome é obrigatório.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="valor">Valor da Meta (R$)</label>
+            <input currencyMask class="form-control" name="valor" [(ngModel)]="modelCadastrar.metaMensal"
+              #valor="ngModel" required />
+          </div>
+          <div class="form-group">
+            <button (click)="salvar()" class="btn  btn-primary"><i class="fa fa-save"></i>
+              Salvar</button>&nbsp;
+            <button class="btn btn-danger" (click)="limpar()"><i class="fa fa-ban"></i> Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-8 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Vendedores
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Meta Mensal</th>
+              <th>Loja</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vendedor of model.vendedores; let i=index">
+              <td>{{vendedor.id}}</td>
+              <td>{{vendedor.nome}}</td>
+              <td>{{vendedor.metaMensal  | currency:'BRL':true}}</td>
+              <td>{{vendedor.loja.nome}}</td>
+              <td><span [ngClass]="{'badge-success': vendedor.ativo, 'badge-danger': !vendedor.ativo}"
+                  class="badge">{{vendedor.ativo ? 'Ativo' : 'Inativo'}}</span></td>
+              <td>
+                <i title="Editar" (click)="visualizar(vendedor.id)" class="fa fa-edit"
+                  style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
+                <i title="Metas" (click)="metas(vendedor.id)" class="fas fa-chart-line" style="font-size:20px;">&nbsp;&nbsp;</i>
+                <i title="Excluir" (click)="excluir(vendedor.id)" class="fa fa-close" style="color:Red; font-size:20px;"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+        </app-pagination> -->
+      </div>
+    </div>
+  </div>
+</div>

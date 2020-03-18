@@ -1,0 +1,64 @@
+<div class="row">
+
+  <div class="col-sm-6 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Caixas
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 col-sm-5">
+            <h4 class="card-title mb-0">Resumo de Caixas</h4>
+            <div class="text-muted">Loja: <strong>{{lojaSelecionada.nome}}</strong>
+            </div>
+            <div class="text-muted">De <strong>{{filtroInicio | date: 'dd/MM/yyyy'}}</strong> à
+              <strong> {{filtroFim | date: 'dd/MM/yyyy'}}</strong>
+            </div>
+            <div class="text-muted">Total do período: <span class="badge badge-success">
+                {{total | currency:'BRL':true}} </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+                (change)="selecionarLoja($event)">
+                <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
+              </select>
+              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker [(bsValue)]="filtroInicio">
+              <input type="text" class="form-control" #dp="bsDatepicker" bsDatepicker [(bsValue)]="filtroFim">
+              <span class="input-group-append">
+                <button class="btn btn-primary" (click)="carregarCaixa()">OK</button>
+              </span>
+            </div>
+          </div>
+          <div class="col-md-12" style=" padding-top:20px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Total</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let caixa of model.caixas; let i=index">
+                  <td>{{caixa.data | date: 'dd/MM/yyyy'}}</td>
+                  <td>{{caixa.valor | currency:'BRL':true}}</td>
+                  <td>
+                    <i (click)="visualizar(caixa.data)" class="fa fa-eye"
+                      style="font-size:20px;padding-left:5px;cursor: pointer;">&nbsp;&nbsp;</i>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <div class="col-md-12">
+            <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+            </app-pagination> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

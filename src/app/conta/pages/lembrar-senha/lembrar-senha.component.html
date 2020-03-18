@@ -1,0 +1,15 @@
+
+<h4 class="font-strong text-center mb-5">LEMBRAR SENHA</h4>
+<div *ngIf="exibir.sucesso" class="alert alert-success alert-bordered"><strong>E-mail enviado!</strong><br>Você reeberá um e-mail em {{email}} para reiniciar a senha.</div>
+<div *ngIf="!exibir.sucesso" (keyup.enter)="enviar()">
+    <p>Digite o e-mail que você cadastrou no site para receber um e-mail com instruções para cadastrar uma nova senha.</p>
+    <div class="form-group mb-4">
+        <input class="form-control" type="email" placeholder="E-mail" [(ngModel)]="model.email">
+    </div>
+    <div class="text-center">
+        <button class="btn btn-blue btn-block text-uppercase" (click)="enviar()">Enviar</button>
+    </div>
+</div>
+<div class="cadastro">
+    <a [routerLink]="['', 'login']">Ir para o login.</a>
+</div>
