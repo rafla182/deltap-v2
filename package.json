@@ -1,19 +1,18 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
-  "version": "2.9.0",
+  "name": "deltap",
+  "version": "2.2.1",
   "description": "Delta P",
   "author": {
     "name": "Rafaela Rosario / Daniel Araujo"
   },
-  "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "start": "ng serve",
-    "build": "ng build --prod --aot --buildOptimizer --commonChunk --vendorChunk --optimization --progress",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "npm run build"
   },
   "private": true,
   "dependencies": {
