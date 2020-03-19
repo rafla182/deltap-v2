@@ -1,0 +1,162 @@
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <div class="filtro-loja">
+        <div class="row">
+          <div class="col-md-9 col-sm-9 label-select">
+            Você está visualizando as estatísticas da loja:
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+              (change)="selecionarLoja($event)">
+              <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="rankingVendasMesVendedorData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="card-title mb-0">RANKING DE VENDAS MENSAL POR FUNCIONÁRIO </h4>
+              <!-- <div class="small text-muted">{{mes}}</div> -->
+            </div>
+          </div>
+          <div class="chart-wrapper" style="margin-top:20px;">
+            <canvas baseChart [datasets]="rankingVendasMesVendedorData" [labels]="rankingVendasMesVendedorLabels"
+              [options]="rankingVendasMesVendedorOptions" [legend]="rankingVendasMesVendedorLegenda"
+              [colors]="rankingVendasMesVendedorColors" [chartType]="vendaDiariaPorLojaTipo"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="vendasPorMesPorVendedorData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="card-title mb-0">RANKING DE VENDAS MÊS A MÊS POR FUNCIONÁRIO POR LOJA </h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <select class="form-control select-mes" [(ngModel)]="mesSelectVendasMesPorVendedor"
+                (change)="selecionarMesVendasMesPorVendedor($event)" [ngModelOptions]="{standalone: true}">
+                <option [value]="1">Janeiro</option>
+                <option [value]="2">Fevereiro</option>
+                <option [value]="3">Março</option>
+                <option [value]="4">Abril</option>
+                <option [value]="5">Maio</option>
+                <option [value]="6">Junho</option>
+                <option [value]="7">Julho</option>
+                <option [value]="8">Agosto</option>
+                <option [value]="9">Setembro</option>
+                <option [value]="10">Outubro</option>
+                <option [value]="11">Novembro</option>
+                <option [value]="12">Dezembro</option>
+              </select>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="margin-top:20px;">
+            <canvas baseChart [datasets]="vendasPorMesPorVendedorData" [labels]="vendasPorMesPorVendedorLabels"
+              [options]="vendasMesPorVendedorOptions" [legend]="vendasPorMesPorVendedorLegenda"
+              [colors]="vendasPorMesPorVendedorColors" [chartType]="vendasMesPorVendedorTipo"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="historicoVendaPorVendedorData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="card-title mb-0">HISTÓRICO DE VENDAS POR FUNCIONÁRIO</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <select class="form-control select-mes" [(ngModel)]="vendedorSelecionado.id"
+                [ngModelOptions]="{standalone: true}" (change)="selecionarHistoricoVendaPorVendedor($event)">
+                <option *ngFor="let vendedor of vendedores" [value]="vendedor.id">{{vendedor.nome}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <table class="tabela-acumulado">
+                <thead>
+                  <tr>
+                    <th scope="col">ACUMULADO DO ANO</th>
+                    <th scope="col">MÉDIA MENSAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> {{ historicoVendaAcumulado | currency:'BRL':true}}</td>
+                    <td>{{historicoVendaMedia  | currency:'BRL':true}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="margin-top:20px;">
+            <canvas baseChart [datasets]="historicoVendaPorVendedorData" [labels]="historicoVendaPorVendedorLabels"
+              [options]="historicoVendaPorVendedorOptions" [legend]="historicoVendaPorVendedorLegenda"
+              [colors]="historicoVendaPorVendedorColors" [chartType]="historicoVendaPorVendedorTipo"></canvas>
+          </div>
+          <div class="col-sm-12 col-md-12">
+            <div class="box-meta text-right">
+              META {{metaVendedor  | currency:'BRL':true}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="acumuladoValorVendasPorFuncionarioData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="card-title mb-0">ACUMULADO DE VENDAS POR FUNCIONÁRIO (TODAS AS LOJAS)</h4>
+              <div class="small text-muted"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-9">
+              <div class="chart-wrapper" style="margin-top:20px;">
+                <canvas baseChart [datasets]="acumuladoValorVendasPorFuncionarioData"
+                  [labels]="acumuladoValorVendasPorFuncionarioLabels"
+                  [options]="acumuladoValorVendasPorFuncionarioOptions"
+                  [legend]="acumuladoValorVendasPorFuncionarioLegenda"
+                  [colors]="acumuladoValorVendasPorFuncionarioColors"
+                  [chartType]="acumuladoValorVendasPorFuncionarioTipo"></canvas>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <table class="tabela">
+                <tr>
+                  <th>Vendedor</th>
+                  <th>Acumulado</th>
+                  <th>%</th>
+                </tr>
+                <tr *ngFor="let item of acumuladoValorVendasPorFuncionarioDados">
+                  <td [ngStyle]="{'background-color':item.color}">
+                    {{item.vendedor}}
+                  </td>
+                  <td [ngStyle]="{'background-color':item.color}">
+                    {{item.valor  | currency:'BRL':true}}
+                  </td>
+                  <td [ngStyle]="{'background-color':item.color}">
+                    {{item.porcentagem }} %
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

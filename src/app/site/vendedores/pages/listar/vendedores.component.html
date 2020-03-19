@@ -65,14 +65,16 @@
               <td>
                 <i title="Editar" (click)="visualizar(vendedor.id)" class="fa fa-edit"
                   style="font-size:20px;padding-left:5px;">&nbsp;&nbsp;</i>
-                <i title="Metas" (click)="metas(vendedor.id)" class="fas fa-chart-line" style="font-size:20px;">&nbsp;&nbsp;</i>
-                <i title="Excluir" (click)="excluir(vendedor.id)" class="fa fa-close" style="color:Red; font-size:20px;"></i>
+                <i title="Metas" (click)="metas(vendedor.id)" class="fas fa-chart-line"
+                  style="font-size:20px;">&nbsp;&nbsp;</i>
+                <i title="Excluir" (click)="excluir(vendedor.id)" class="fa fa-close"
+                  style="color:Red; font-size:20px;"></i>
               </td>
             </tr>
           </tbody>
         </table>
-        <!-- <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
-        </app-pagination> -->
+        <app-pagination [page]="pagination.page" [total]="pagination.total" (newPage)="goToPage($event)">
+        </app-pagination>
       </div>
     </div>
   </div>

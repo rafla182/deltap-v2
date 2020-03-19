@@ -34,7 +34,7 @@ export class UsuariosCadastrarComponent {
 
         this.empresaSelecionada.id = 0;
         if (this.activatedRoute.snapshot.data['usuario']) {
-            this.model = this.activatedRoute.snapshot.data['usuario'];
+            this.model = this.activatedRoute.snapshot.data['usuario'].resultado;
         }
 
         this.dropdownSettings = {
@@ -53,7 +53,7 @@ export class UsuariosCadastrarComponent {
     carregarEmpresas() {
         this.empresasService.carregar().subscribe(
             sucesso => {
-                this.empresas = sucesso;
+                this.empresas = sucesso.resultado;
                 if (this.model.lojas.length > 0) {
                     this.empresaSelecionada.id = this.model.lojas[0].empresa.id;
                     this.carregarLojas(this.empresaSelecionada.id);
@@ -73,7 +73,7 @@ export class UsuariosCadastrarComponent {
         this.selectedItems = [];
         this.lojasService.carregarPorEmpresa(value).subscribe(
             sucesso => {
-                this.lojas = sucesso;
+                this.lojas = sucesso.resultado;
                 this.dropdownList = this.lojas.map(p => {
                     return {
                         id: p.id,

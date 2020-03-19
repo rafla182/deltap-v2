@@ -17,6 +17,7 @@ import { LogadoGuard } from './guards/logado.guard';import { DeslogadoGuard } fr
 import { AdministradorGuard } from './guards/administrado.guard';import { UsuarioService } from './services/usuarios/usuario.service';import { HttpService } from './services/http/http.service';import { TokenService } from './services/usuarios/token.service';import { UsuariosResolve } from './resolves/usuarios/usuarios.resolve';import { UsuariosCadastrarResolve } from './resolves/usuarios/usuarios-cadastrar.resolve';import { VendedoresResolve } from './resolves/vendedores/vendedores.resolve';import { VendedoresCadastrarResolve } from './resolves/vendedores/vendedores-cadastrar.resolve';import { EmpresasResolve } from './resolves/empresas/empresas.resolve';import { EmpresasCadastrarResolve } from './resolves/empresas/empresas-cadastrar.resolve';import { LojasResolve } from './resolves/lojas/lojas.resolve';import { LojasCadastrarResolve } from './resolves/lojas/lojas-cadastrar.resolve';import { FormaPagamentoResolve } from './resolves/forma-pagamento/forma-pagamento.resolve';import { FormaPagamentoCadastrarResolve } from './resolves/forma-pagamento/forma-pagamento-cadastrar.resolve';import { CaixaResolve } from './resolves/caixa/caixa.resolve';import { MovimentacaoResolve } from './resolves/caixa/movimentacao.resolve';import { SimularAcessoResolve } from './resolves/usuarios/simular-acesso.resolve';
 import { DefaultLayoutComponent } from '../default-layout';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
         AppHeaderModule,
         AppSidebarModule,
         BsDatepickerModule.forRoot(),
-        PerfectScrollbarModule
+        PerfectScrollbarModule,
+        CurrencyMaskModule
     ],
     declarations: [
         ClickOutsideDirective,
@@ -82,7 +84,8 @@ import { PaginationComponent } from './components/pagination/pagination.componen
         UsuarioComponent,
         DateFormatPipe,
         DateFormatPipeHour,
-        BsDatepickerModule
+        BsDatepickerModule,
+        CurrencyMaskModule
     ]
 })
 export class CoreModule { }

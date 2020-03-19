@@ -32,7 +32,7 @@ export class LojasComponent implements OnInit {
 
     ngOnInit(): void {
         this.carregarEmpresas();
-        this.model.lojas = this.activatedRoute.snapshot.data['lojas'];
+        this.model.lojas = this.activatedRoute.snapshot.data['lojas'].resultado;
         this.pagination.total = this.model.lojas ? this.model.lojas.lenght : 0;
         this.pagination.page = 1;
     }
@@ -155,7 +155,7 @@ export class LojasComponent implements OnInit {
         } else {
             this.lojaService.carregarPorEmpresa(value).subscribe(
                 sucesso => {
-                    this.model.lojas = sucesso;
+                    this.model.lojas = sucesso.resultado;
                 });
         }
     }

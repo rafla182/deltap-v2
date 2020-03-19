@@ -31,11 +31,11 @@ export class VendedoresComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-
+        console.log("aqu");
         this.usuario = this.userSerivce.carregar();
         this.lojas = this.usuario.lojas;
-
-        this.model.vendedores = this.activatedRoute.snapshot.data['vendedores'];
+        
+        this.model.vendedores = this.activatedRoute.snapshot.data['vendedores'].resultado;
         this.lojaSelecionada = this.model.vendedores.length > 0 ? this.model.vendedores[0].loja : 0;
 
         this.pagination.total = this.model.vendedores ? this.model.vendedores.lenght : 0;
@@ -122,7 +122,8 @@ export class VendedoresComponent implements OnInit {
     list() {
         this.vendedorService.carregar(this.lojaSelecionada.id).subscribe(
             sucesso => {
-                this.model.vendedores = sucesso;
+                console.log(sucesso);
+                this.model.vendedores = sucesso.sucesso;
             });
 
     }

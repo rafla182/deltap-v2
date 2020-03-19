@@ -39,7 +39,7 @@ export class CaixaComponent {
             this.filtroInicio = params['inicio'] ? new Date(params['inicio'].replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')) : inicio;
             this.filtroFim = params['fim'] ? new Date(params['fim'].replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')) : new Date();
 
-            this.model.caixas = this.activatedRoute.snapshot.data['caixas'];
+            this.model.caixas = this.activatedRoute.snapshot.data['caixas'].resultado;
             this.pagination.total = this.model.caixa ? this.model.caixa.lenght : 0;
             this.pagination.page = 1;
             this.total = this.model.caixas.reduce((sum, current) => sum + current.valor, 0);

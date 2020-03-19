@@ -34,7 +34,7 @@ export class MovimentacaoComponent {
     lojaSelecionada: any = {};
     mostrar = { vendedorAsc: false, pagamentoAsc: false };
     datePickerConfig: Partial<BsDatepickerConfig>;
-
+    
     constructor(
         private activatedRoute: ActivatedRoute,
         private caixaService: CaixaService,
@@ -54,10 +54,13 @@ export class MovimentacaoComponent {
         );
         this.activatedRoute.params.subscribe(params => {
 
-            this.model.lancamentos = this.activatedRoute.snapshot.data['lancamentos'];
+            this.model.lancamentos = this.activatedRoute.snapshot.data['lancamentos'].resultado;
             this.soma = this.model.lancamentos ? this.model.lancamentos.reduce((sum, current) => sum + current.valor, 0) : 0;
             this.data = params['data'];
             this.lojaParam = +params['loja'];
+
+            this.pagination.total = this.model.lancamentos.lenght;
+            this.pagination.page = 1;
 
             this.usuario = this.userSerivce.carregar();
             this.lojas = this.usuario.lojas.sort(p => p.id);
@@ -82,7 +85,7 @@ export class MovimentacaoComponent {
 
     listar() {
         this.data = moment(this.modelMovimentacao.data).format('DD-MM-YYYY');
-        
+
         this.list();
     }
 
@@ -96,7 +99,7 @@ export class MovimentacaoComponent {
             //     p.data = this.dateTimePipeHour.transform(p.data, 'yyyy-MM-dd HH:mm');
             // });
 
-            this.model.lancamentos = response;
+            this.model.lancamentos = response.resultado;
             this.soma = this.model.lancamentos.reduce((sum, current) => sum + current.valor, 0);
         },
             erro => {
@@ -107,7 +110,7 @@ export class MovimentacaoComponent {
     carregarFormaPagamento() {
         this.formaPagamentoService.carregar().subscribe(
             sucesso => {
-                this.formaPagamentos = sucesso;
+                this.formaPagamentos = sucesso.resultado;
                 this.formaPagamentoSelecionado.id = 0;
             },
             erro => {
@@ -121,7 +124,7 @@ export class MovimentacaoComponent {
 
         this.vendedorService.carregar(this.lojaSelecionada.id).subscribe(
             sucesso => {
-                this.vendedores = sucesso;
+                this.vendedores = sucesso.resultado;
                 this.vendedorSelecionado.id = 0;
                 this.list();
             },

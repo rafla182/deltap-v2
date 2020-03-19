@@ -1,4 +1,17 @@
-import { NgModule } from '@angular/core';import { CoreModule } from '../../core/core.module';import { FormsModule } from '@angular/forms';import { DashboardRoutingModule } from './dashboard-routing.module';import { ChartsModule } from 'ng2-charts';import { BsDropdownModule, ButtonsModule, TabsModule } from 'ngx-bootstrap';import { DashboardComponent } from './dashboard.component';import { DashboardService } from '../../core/services/dashboard.services';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardService } from '../../core/services/dashboard.services';
+import { CoreModule } from '../../core/core.module';
+import { TabsModule } from 'ngx-bootstrap';
+import { DashboardRankingComponent } from './dashboard-ranking.component';
+import { DashboardVolumeComponent } from './dashboard-volume.component';
+import { DashboardComparativoComponent } from './dashboard-comparativo.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
     imports: [
@@ -12,6 +25,9 @@ import { NgModule } from '@angular/core';import { CoreModule } from '../../core/
     ],
     declarations: [
         DashboardComponent,
+        DashboardRankingComponent,
+        DashboardVolumeComponent,
+        DashboardComparativoComponent
     ],
     exports: [
     ],

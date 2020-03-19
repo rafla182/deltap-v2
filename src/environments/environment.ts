@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:12345/api/',
+  api: 'https://deltap-api.azurewebsites.net/api/',
   storageUsuario: 'delta-user-dev',
   storageToken: 'delta-token-dev',
   site: 'http://localhost:4200/'

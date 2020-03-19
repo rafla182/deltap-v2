@@ -23,7 +23,7 @@ export class FormaPagamentoComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.model.formasPagamento = this.activatedRoute.snapshot.data['formasPagamento'];
+        this.model.formasPagamento = this.activatedRoute.snapshot.data['formasPagamento'].resultado;
         this.pagination.total = this.model.formasPagamento ? this.model.formasPagamento.lenght : 0;
         this.pagination.page = 1;
     }
@@ -69,7 +69,7 @@ export class FormaPagamentoComponent implements OnInit {
     list() {
         this.formaPagamentoService.carregar().subscribe(
             sucesso => {
-                this.model.formasPagamento = sucesso;
+                this.model.formasPagamento = sucesso.resultado;
             }
         );
     }

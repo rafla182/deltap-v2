@@ -1,0 +1,77 @@
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <div class="filtro-loja">
+        <div class="row">
+          <div class="col-md-9 col-sm-9 label-select">
+            Você está visualizando as estatísticas da loja:
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+              (change)="selecionarLoja($event)">
+              <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="numeroQtdVendasPorMesData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="card-title mb-0">NÚMERO DE VENDAS MENSAIS FEITAS POR LOJA</h4>
+              <div class="small text-muted"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <table class="tabela-acumulado">
+                <thead>
+                  <tr>
+                    <th scope="col">ACUMULADO DO ANO</th>
+                    <th scope="col">MÉDIA MENSAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td> {{ numeroQtdVendasPorMesAcumulado }}</td>
+                    <td>{{ numeroQtdVendasPorMesMedia }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="chart-wrapper" style="margin-top:20px;">
+            <canvas baseChart [datasets]="numeroQtdVendasPorMesData" [labels]="numeroQtdVendasPorMesLabels"
+              [options]="numeroQtdVendasPorMesOptions" [legend]="numeroQtdVendasPorMesLegenda"
+              [colors]="numeroQtdVendasPorMesColors" [chartType]="numeroQtdVendasPorMesTipo"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="comparativoTicketVendasPorFuncionarioData.length > 0">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <h4 class="card-title mb-0">TKT MÉDIO DE VENDAS POR FUNCIONÁRIO POR LOJA</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="chart-wrapper" style="margin-top:20px;">
+                <canvas baseChart [datasets]="comparativoTicketVendasPorFuncionarioData"
+                  [labels]="comparativoTicketVendasPorFuncionarioLabels"
+                  [options]="comparativoTicketVendasPorFuncionarioOptions"
+                  [legend]="comparativoTicketVendasPorFuncionarioLegenda"
+                  [colors]="comparativoTicketVendasPorFuncionarioColors"
+                  [chartType]="comparativoTicketVendasPorFuncionarioTipo"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

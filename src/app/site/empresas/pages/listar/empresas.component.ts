@@ -23,7 +23,7 @@ export class EmpresasComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.model.empresas = this.activatedRoute.snapshot.data['empresas'];
+        this.model.empresas = this.activatedRoute.snapshot.data['empresas'].resultado;
         this.pagination.total = this.model.empresas ? this.model.empresas.lenght : 0;
         this.pagination.page = 1;
     }
@@ -93,7 +93,7 @@ export class EmpresasComponent implements OnInit {
     list() {
         this.empresaService.carregar().subscribe(
             sucesso => {
-                this.model.empresas = sucesso;
+                this.model.empresas = sucesso.resultado;
             }
         );
     }

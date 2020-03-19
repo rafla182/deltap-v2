@@ -33,8 +33,8 @@ export class DashboardComponent implements OnInit {
         }
     ];
     vendaDiariaPorLojaTipo = 'line';
-    vendaDiariaPorLojaOptions: (ChartOptions ) = {
-        
+    vendaDiariaPorLojaOptions: (ChartOptions) = {
+
         tooltips: {
             enabled: false,
             custom: CustomTooltips,
@@ -43,9 +43,12 @@ export class DashboardComponent implements OnInit {
             mode: 'index',
             position: 'nearest',
             callbacks: {
-                // labelColor: function (tooltipItem, chart) {
-                //     return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
-                // },
+                labelColor: function (tooltipItem, chart) {
+                    return {
+                        borderColor: 'rgb(255, 0, 0)',
+                        backgroundColor: 'rgb(255, 0, 0)',
+                    };
+                },
                 label: function (t, d) {
                     const xLabel = d.datasets[t.datasetIndex].label;
                     const yLabel = t.yLabel >= 1000 ? 'R$' + t.yLabel.toString().split('.').join(',') : 'R$' + t.yLabel;
@@ -276,15 +279,15 @@ export class DashboardComponent implements OnInit {
 
         this.dashboardService.vendasDiariasPorLoja(this.lojaSelecionada.id, this.mesSelect).subscribe(response => {
 
-            this.vendaDiariaPorLojaLabels = response.map(p => p.data);
+            this.vendaDiariaPorLojaLabels = response.resultado.map(p => p.data);
             this.vendaDiariaPorLojaData.push(
                 {
-                    data: response.map(p => p.valor),
+                    data: response.resultado.map(p => p.valor),
                     label: ''
                 });
-            this.vendasDiariaAcumulado = response.map(p => p.valor).reduce((sum, current) => sum + current);
-            this.vendasDiariasMedia = (response.map(p => p.valor).reduce((sum, current) => sum + current)
-                / response.map(p => p.valor).length).toFixed(2);
+            this.vendasDiariaAcumulado = response.resultado.map(p => p.valor).reduce((sum, current) => sum + current);
+            this.vendasDiariasMedia = (response.resultado.map(p => p.valor).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => p.valor).length).toFixed(2);
         });
     }
 
@@ -301,7 +304,7 @@ export class DashboardComponent implements OnInit {
 
             const data = [];
             this.meses.forEach(mes => {
-                const x = response.find(p => p.mes === mes);
+                const x = response.resultado.find(p => p.mes === mes);
                 if (x) {
                     data.push(x.valor);
                 } else {
@@ -315,10 +318,10 @@ export class DashboardComponent implements OnInit {
                     label: ''
                 });
 
-            this.vendasMesAcumulado = response.map(p => p.valor).reduce((sum, current) => sum + current);
+            this.vendasMesAcumulado = response.resultado.map(p => p.valor).reduce((sum, current) => sum + current);
             console.log(this.vendasMesAcumulado);
-            this.vendasMesMedia = (response.map(p => p.valor).reduce((sum, current) => sum + current)
-                / response.map(p => p.valor).length).toFixed(2);
+            this.vendasMesMedia = (response.resultado.map(p => p.valor).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => p.valor).length).toFixed(2);
         });
     }
 

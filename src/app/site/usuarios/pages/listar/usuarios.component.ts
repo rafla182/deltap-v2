@@ -36,7 +36,7 @@ export class UsuariosComponent {
 
     ngOnInit(): void {
 
-        this.model.usuarios = this.activatedRoute.snapshot.data['usuarios'];
+        this.model.usuarios = this.activatedRoute.snapshot.data['usuarios'].resultado;
         this.pagination.total = this.model.usuarios.lenght;
         this.pagination.page = 1;
 
@@ -168,7 +168,7 @@ export class UsuariosComponent {
 
     list() {
         this.contaService.listar().subscribe(sucesso => {
-            this.model.usuarios = sucesso;
+            this.model.usuarios = sucesso.resultado;
         });
     }
 
