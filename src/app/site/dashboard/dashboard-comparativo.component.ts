@@ -39,17 +39,20 @@ export class DashboardComparativoComponent implements OnInit {
         tooltips: {
             enabled: true,
             callbacks: {
-                // label: function (tooltipItem, data) {
-                //    const allData = data.datasets[tooltipItem.datasetIndex].data;
-                //     const tooltipLabel = data.labels[tooltipItem.index];
-                //     const tooltipData = allData[tooltipItem.index];
-                //     let total = 0.0;
-                //     for (let i in allData) {
-                //         total += parseFloat(allData[i]);
-                //     }
-                //     const tooltipPercentage = (parseFloat(tooltipData) / total) * 100;
-                //     return tooltipLabel + ': R$' + tooltipData + ' (' + tooltipPercentage.toFixed(2) + '%)';
-                // }
+                label: function (tooltipItem, data) {
+                    console.log(tooltipItem);
+                    return "";
+                    //    const allData = data.datasets[tooltipItem.datasetIndex].data;
+                    //     const tooltipLabel = data.labels[tooltipItem.index];
+                    //     const tooltipData = allData[tooltipItem.index];
+                    //     let total = 0.0;
+                    //     for (let i in allData) {
+                    //         console.log(allData);
+                    //         total += parseFloat(allData[i]);
+                    //     }
+                    //     const tooltipPercentage = (parseFloat(tooltipData) / total) * 100;
+                    //     return tooltipLabel + ': R$' + tooltipData + ' (' + tooltipPercentage.toFixed(2) + '%)';
+                }
             }
         },
         plugins: {
@@ -75,7 +78,7 @@ export class DashboardComparativoComponent implements OnInit {
     comparativoVendasPorDiaPorLojaLabels = [];
     comparativoVendasPorDiaPorLojaColors: Array<any> = [];
     comparativoVendasPorDiaPorLojaLegenda = true;
-    comparativoVendasPorDiaPorLojaOptions: (ChartOptions ) = {
+    comparativoVendasPorDiaPorLojaOptions: (ChartOptions) = {
         legend: {
             // label: {
             //     boxWidth: 5,
@@ -92,9 +95,12 @@ export class DashboardComparativoComponent implements OnInit {
             mode: 'index',
             position: 'nearest',
             callbacks: {
-                // labelColor: function (tooltipItem, chart) {
-                //     return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
-                // },
+                labelColor: function (tooltipItem, chart) {
+                    return {
+                        borderColor: 'rgb(255, 0, 0)',
+                        backgroundColor: 'rgb(255, 0, 0)',
+                    };
+                },
                 label: function (t, d) {
                     const xLabel = d.datasets[t.datasetIndex].label;
                     const yLabel = t.yLabel >= 1000 ? 'R$' + t.yLabel.toString().split('.').join(',') : 'R$' + t.yLabel;
@@ -151,13 +157,15 @@ export class DashboardComparativoComponent implements OnInit {
             enabled: false,
             custom: CustomTooltips,
             intersect: true,
-            // fontFamily: "Tahoma",
             mode: 'index',
             position: 'nearest',
             callbacks: {
-                // labelColor: function (tooltipItem, chart) {
-                //     return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
-                // },
+                labelColor: function (tooltipItem, chart) {
+                    return {
+                        borderColor: 'rgb(255, 0, 0)',
+                        backgroundColor: 'rgb(255, 0, 0)'
+                    };
+                },
                 label: function (t, d) {
                     const xLabel = d.datasets[t.datasetIndex].label;
                     const yLabel = t.yLabel >= 1000 ? 'R$' + t.yLabel.toString().split('.').join(',') : 'R$' + t.yLabel;
@@ -166,7 +174,7 @@ export class DashboardComparativoComponent implements OnInit {
             }
         },
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: false, 
         scales: {
             yAxes: [{
                 ticks: {
@@ -225,7 +233,7 @@ export class DashboardComparativoComponent implements OnInit {
     acumuladoValorVendasPorFuncionarioColors: Array<any> = [];
     acumuladoValorVendasPorFuncionarioLegenda = false;
     acumuladoValorVendasPorFuncionarioTipo = 'pie';
-    acumuladoValorVendasPorFuncionarioOptions: (ChartOptions ) = {
+    acumuladoValorVendasPorFuncionarioOptions: (ChartOptions) = {
         legend: {
             position: 'bottom',
             // label: {
@@ -277,7 +285,7 @@ export class DashboardComparativoComponent implements OnInit {
     numeroQtdVendasPorMesColors: Array<any> = [];
     numeroQtdVendasPorMesLegenda = false;
     numeroQtdVendasPorMesTipo = 'bar';
-    numeroQtdVendasPorMesOptions: (ChartOptions ) = {
+    numeroQtdVendasPorMesOptions: (ChartOptions) = {
         tooltips: {
             enabled: false,
             custom: CustomTooltips,
@@ -393,7 +401,7 @@ export class DashboardComparativoComponent implements OnInit {
     comparativoNumeroVendasPorLojaLabels = [];
     comparativoNumeroVendasPorLojaColors: Array<any> = [];
     comparativoNumeroVendasPorLojaLegenda = true;
-    comparativoNumeroVendasPorLojaOptions: (ChartOptions ) = {
+    comparativoNumeroVendasPorLojaOptions: (ChartOptions) = {
         tooltips: {
             enabled: false,
             custom: CustomTooltips,
@@ -453,7 +461,7 @@ export class DashboardComparativoComponent implements OnInit {
     comparativoTicketVendasPorLojaLabels = [];
     comparativoTicketVendasPorLojaColors: Array<any> = [];
     comparativoTicketVendasPorLojaLegenda = true;
-    comparativoTicketVendasPorLojaOptions: (ChartOptions ) = {
+    comparativoTicketVendasPorLojaOptions: (ChartOptions) = {
         legend: {
             position: 'bottom',
             // label: {
@@ -528,7 +536,6 @@ export class DashboardComparativoComponent implements OnInit {
 
         this.usuario = this.usuarioService.carregar();
         this.lojas = this.usuario.lojas;
-        console.log(this.lojas);
         this.lojaSelecionada = this.lojas[0];
         this.metaLoja = this.lojaSelecionada.metaMensal;
 
@@ -565,18 +572,18 @@ export class DashboardComparativoComponent implements OnInit {
 
     listarAcumulativoVendasPorMesLoja() {
         this.dashboardService.acumuladoVendaPorPeriodo(this.lojaSelecionada.empresa.id).subscribe(response => {
-            this.acumuladoVendasPorMesLabels = response.map(p => p.loja);
+            this.acumuladoVendasPorMesLabels = response.resultado.map(p => p.loja);
 
             this.acumuladoVendasPorMesData.push(
                 {
-                    data: response.map(p => p.quantidade),
+                    data: response.resultado.map(p => p.quantidade),
                     label: ''
                 });
             const colors = [];
             this.acumuladoVendasPorMesLabels.forEach(p => {
 
                 const color = this.getRandomColor(colors);
-                const data = response.find(x => x.loja === p);
+                const data = response.resultado.find(x => x.loja === p);
 
                 this.acumuladoVendasPorMesDados.push({
                     quantidade: data.quantidade,
@@ -591,7 +598,6 @@ export class DashboardComparativoComponent implements OnInit {
                 backgroundColor: colors
             });
 
-            console.log(this.acumuladoVendasPorMesData);
             this.acumuladoVendasPorMesDados = this.acumuladoVendasPorMesDados.sort((a, b) => {
                 return a.quantidade - b.quantidade;
             }).reverse();
@@ -642,18 +648,18 @@ export class DashboardComparativoComponent implements OnInit {
             //         fill: false
             //     });
             // });
-            this.acumuladoValorVendasPorMesLabels = response.map(p => p.loja);
+            this.acumuladoValorVendasPorMesLabels = response.resultado.map(p => p.loja);
 
             this.acumuladoValorVendasPorMesData.push(
                 {
-                    data: response.map(p => p.valor ? p.valor.toFixed(2) : 0),
+                    data: response.resultado.map(p => p.valor ? p.valor.toFixed(2) : 0),
                     label: ''
                 });
             const colors = [];
             this.acumuladoValorVendasPorMesLabels.forEach(p => {
 
                 const color = this.getRandomColor(colors);
-                const data = response.find(x => x.loja === p);
+                const data = response.resultado.find(x => x.loja === p);
 
                 this.acumuladoValorVendasPorMesDados.push({
                     valor: data.valor,
@@ -692,13 +698,12 @@ export class DashboardComparativoComponent implements OnInit {
             }
 
             this.comparativoVendasPorDiaPorLojaLabels = diasArray;
-            console.log(diasArray);
             const colors = [];
 
-            response.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
+            response.resultado.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
                 .forEach(loja => {
 
-                    const valoresLoja = response.filter(p => p.loja === loja);
+                    const valoresLoja = response.resultado.filter(p => p.loja === loja);
 
                     const data = [];
                     diasArray.forEach(dia => {
@@ -727,10 +732,10 @@ export class DashboardComparativoComponent implements OnInit {
             this.comparativoVendasPorMesPorLojaLabels = this.meses.slice(0, this.mes);
             const colors = [];
 
-            response.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
+            response.resultado.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
                 .forEach(loja => {
 
-                    const valoresLoja = response.filter(p => p.loja === loja);
+                    const valoresLoja = response.resultado.filter(p => p.loja === loja);
 
                     const data = [];
                     this.meses.forEach(mes => {
@@ -767,19 +772,19 @@ export class DashboardComparativoComponent implements OnInit {
 
     listarAcumuladoValorVendaPorVendedor() {
         this.dashboardService.acumuladoValorVendaPorVendedor(this.lojaSelecionada.empresa.id).subscribe(response => {
-            this.acumuladoValorVendasPorFuncionarioLabels = response.map(p => p.vendedor);
+            this.acumuladoValorVendasPorFuncionarioLabels = response.resultado.map(p => p.vendedor);
 
 
             this.acumuladoValorVendasPorFuncionarioData.push(
                 {
-                    data: response.map(p => p.valor ? p.valor.toFixed(2) : 0),
+                    data: response.resultado.map(p => p.valor ? p.valor.toFixed(2) : 0),
                     label: ''
                 });
             const colors = [];
             this.acumuladoValorVendasPorFuncionarioLabels.forEach(p => {
 
                 const color = this.getRandomColor(colors);
-                const data = response.find(x => x.vendedor === p);
+                const data = response.resultado.find(x => x.vendedor === p);
 
                 // this.acumuladoValorVendasPorFuncionarioDados.push({
                 //     valor: data.valor,
@@ -828,7 +833,7 @@ export class DashboardComparativoComponent implements OnInit {
 
             const data = [];
             this.meses.forEach(mes => {
-                const x = response.find(p => p.mes === mes);
+                const x = response.resultado.find(p => p.mes === mes);
                 if (x) {
                     data.push(x.quantidade);
                 } else {
@@ -842,9 +847,9 @@ export class DashboardComparativoComponent implements OnInit {
                     label: ''
                 });
 
-            this.numeroQtdVendasPorMesAcumulado = response.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current);
-            this.numeroQtdVendasPorMesMedia = (response.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current)
-                / response.map(p => parseInt(p.quantidade)).length).toFixed(2);
+            this.numeroQtdVendasPorMesAcumulado = response.resultado.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current);
+            this.numeroQtdVendasPorMesMedia = (response.resultado.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => parseInt(p.quantidade)).length).toFixed(2);
         });
     }
 
@@ -852,10 +857,10 @@ export class DashboardComparativoComponent implements OnInit {
         this.dashboardService.comparativoNumeroVendasPorLoja(this.lojaSelecionada.empresa.id).subscribe(response => {
             this.comparativoNumeroVendasPorLojaLabels = this.meses.slice(0, this.mes);
             const colors = [];
-            response.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
+            response.resultado.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
                 .forEach(loja => {
 
-                    const valoresLoja = response.filter(p => p.loja === loja);
+                    const valoresLoja = response.resultado.filter(p => p.loja === loja);
 
                     const data = [];
                     this.meses.forEach(mes => {
@@ -885,10 +890,9 @@ export class DashboardComparativoComponent implements OnInit {
                     });
 
                 });
-            console.log(response);
-            this.comparativoNumeroVendasPorAcumulado = response.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current);
-            this.comparativoNumeroVendasPorMedia = (response.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current)
-                / response.map(p => parseInt(p.quantidade)).length).toFixed(2);
+            this.comparativoNumeroVendasPorAcumulado = response.resultado.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current);
+            this.comparativoNumeroVendasPorMedia = (response.resultado.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => parseInt(p.quantidade)).length).toFixed(2);
         });
     }
 
@@ -896,10 +900,10 @@ export class DashboardComparativoComponent implements OnInit {
         this.dashboardService.comparativoTicketMedioVendasPorLoja(this.lojaSelecionada.empresa.id).subscribe(response => {
             this.comparativoTicketVendasPorLojaLabels = this.meses.slice(0, this.mes);;
             const colors = [];
-            response.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
+            response.resultado.map(p => p.loja).filter((v, i, a) => a.indexOf(v) === i)
                 .forEach(loja => {
 
-                    const valoresLoja = response.filter(p => p.loja === loja);
+                    const valoresLoja = response.resultado.filter(p => p.loja === loja);
 
                     const data = [];
                     this.meses.forEach(mes => {
@@ -930,9 +934,9 @@ export class DashboardComparativoComponent implements OnInit {
 
                 });
 
-            this.comparativoTicketVendasPorLojaAcumulado = response.map(p => p.ticketMedio).reduce((sum, current) => sum + current);
-            this.comparativoTicketVendasPorLojaMedia = (response.map(p => p.ticketMedio).reduce((sum, current) => sum + current)
-                / response.map(p => p.ticketMedio).length).toFixed(2);
+            this.comparativoTicketVendasPorLojaAcumulado = response.resultado.map(p => p.ticketMedio).reduce((sum, current) => sum + current);
+            this.comparativoTicketVendasPorLojaMedia = (response.resultado.map(p => p.ticketMedio).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => p.ticketMedio).length).toFixed(2);
         });
     }
 

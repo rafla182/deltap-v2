@@ -210,7 +210,7 @@ export class DashboardVolumeComponent implements OnInit {
 
             const data = [];
             this.meses.forEach(mes => {
-                const x = response.find(p => p.mes === mes);
+                const x = response.resultado.find(p => p.mes === mes);
                 if (x) {
                     data.push(x.quantidade);
                 } else {
@@ -233,9 +233,9 @@ export class DashboardVolumeComponent implements OnInit {
                 backgroundColor: colors
             });
 
-            this.numeroQtdVendasPorMesAcumulado = response.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current);
-            this.numeroQtdVendasPorMesMedia = (response.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current)
-                / response.map(p => parseInt(p.quantidade)).length).toFixed(2);
+            this.numeroQtdVendasPorMesAcumulado = response.resultado.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current);
+            this.numeroQtdVendasPorMesMedia = (response.resultado.map(p => parseInt(p.quantidade)).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => parseInt(p.quantidade)).length).toFixed(2);
         });
     }
 
@@ -243,10 +243,10 @@ export class DashboardVolumeComponent implements OnInit {
         this.dashboardService.comparativoTicketMedioVendasPorFuncionario(this.lojaSelecionada.empresa.id).subscribe(response => {
             this.comparativoTicketVendasPorFuncionarioLabels = this.meses.slice(0, this.mes);
             const colors = [];
-            response.map(p => p.vendedor).filter((v, i, a) => a.indexOf(v) === i)
+            response.resultado.map(p => p.vendedor).filter((v, i, a) => a.indexOf(v) === i)
                 .forEach(vendedor => {
 
-                    const valoresVendedor = response.filter(p => p.vendedor === vendedor);
+                    const valoresVendedor = response.resultado.filter(p => p.vendedor === vendedor);
 
                     const data = [];
                     this.meses.forEach(mes => {

@@ -49,6 +49,9 @@ export class DashboardComponent implements OnInit {
                         backgroundColor: 'rgb(255, 0, 0)',
                     };
                 },
+                labelTextColor: function(tooltipItem, chart) {
+                    return '#543453';
+                },
                 label: function (t, d) {
                     const xLabel = d.datasets[t.datasetIndex].label;
                     const yLabel = t.yLabel >= 1000 ? 'R$' + t.yLabel.toString().split('.').join(',') : 'R$' + t.yLabel;

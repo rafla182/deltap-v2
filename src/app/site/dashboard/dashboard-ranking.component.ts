@@ -349,10 +349,10 @@ export class DashboardRankingComponent implements OnInit {
         this.dashboardService.rankingVendasMesVendedor(this.lojaSelecionada.id).subscribe(response => {
             this.rankingVendasMesVendedorLabels = this.meses.slice(0, this.mes);;
             const colors = [];
-            response.map(p => p.vendedor).filter((v, i, a) => a.indexOf(v) === i)
+            response.resultado.map(p => p.vendedor).filter((v, i, a) => a.indexOf(v) === i)
                 .forEach(vendedor => {
 
-                    const valoresVendedor = response.filter(p => p.vendedor === vendedor);
+                    const valoresVendedor = response.resultado.filter(p => p.vendedor === vendedor);
 
                     const data = [];
                     this.meses.forEach(mes => {
@@ -392,12 +392,12 @@ export class DashboardRankingComponent implements OnInit {
         this.dashboardService.rankingVendasMesVendedorPorLoja(this.mesSelectVendasMesPorVendedor,
             this.lojaSelecionada.id).subscribe(response => {
 
-            this.vendasPorMesPorVendedorLabels = response.map(p => p.vendedor);
+            this.vendasPorMesPorVendedorLabels = response.resultado.map(p => p.vendedor);
             const cores = [];
 
             this.vendasPorMesPorVendedorData.push(
                 {
-                    data: response.map(p => p.valor ? p.valor.toFixed(2) : 0),
+                    data: response.resultado.map(p => p.valor ? p.valor.toFixed(2) : 0),
                     label: ''
                 });
 
@@ -453,7 +453,7 @@ export class DashboardRankingComponent implements OnInit {
             this.historicoVendaPorVendedorLabels = this.meses.slice(0, this.mes);;
             const data = [];
             this.meses.forEach(mes => {
-                const x = response.find(p => p.mes === mes);
+                const x = response.resultado.find(p => p.mes === mes);
                 if (x) {
                     data.push(x.valor);
                 } else {
@@ -467,27 +467,27 @@ export class DashboardRankingComponent implements OnInit {
                     label: ''
                 });
             
-            this.historicoVendaAcumulado = response.map(p => p.valor).reduce((sum, current) => sum + current);
-            this.historicoVendaMedia = (response.map(p => p.valor).reduce((sum, current) => sum + current)
-                / response.map(p => p.valor).length).toFixed(2);
+            this.historicoVendaAcumulado = response.resultado.map(p => p.valor).reduce((sum, current) => sum + current);
+            this.historicoVendaMedia = (response.resultado.map(p => p.valor).reduce((sum, current) => sum + current)
+                / response.resultado.map(p => p.valor).length).toFixed(2);
         });
     }
 
     listarAcumuladoValorVendaPorVendedor() {
         this.dashboardService.acumuladoValorVendaPorVendedor(this.lojaSelecionada.empresa.id).subscribe(response => {
-            this.acumuladoValorVendasPorFuncionarioLabels = response.map(p => p.vendedor);
+            this.acumuladoValorVendasPorFuncionarioLabels = response.resultado.map(p => p.vendedor);
 
 
             this.acumuladoValorVendasPorFuncionarioData.push(
                 {
-                    data: response.map(p => p.valor ? p.valor.toFixed(2) : 0),
+                    data: response.resultado.map(p => p.valor ? p.valor.toFixed(2) : 0),
                     label: ''
                 });
             const colors = [];
             this.acumuladoValorVendasPorFuncionarioLabels.forEach(p => {
 
                 const color = this.getRandomColor(colors);
-                const data = response.find(x => x.vendedor === p);
+                const data = response.resultado.find(x => x.vendedor === p);
 
                 this.acumuladoValorVendasPorFuncionarioDados.push({
                     valor: data.valor,
@@ -552,9 +552,9 @@ export class DashboardRankingComponent implements OnInit {
 
     carregarVendedores() {
         this.vendedorService.carregar(this.usuario.lojas[0].id).subscribe(response => {
-            this.vendedores = response;
+            this.vendedores = response.resultado;
             if (this.vendedores) {
-                this.vendedorSelecionado.id = response[0].id;
+                this.vendedorSelecionado.id = response.resultado[0].id;
                 this.metaVendedor = this.vendedores.find(p => p.id === this.vendedorSelecionado.id).metaMensal;
             }
 
