@@ -123,7 +123,7 @@ export class DashboardComparativoComponent implements OnInit {
                         maxTicksLimit: 20,
                         stepSize: 20,
                         callback: function (value, index, values) {
-                            if (parseInt(value) >= 1000) {
+                            if (value >= 1000) {
                                 return 'R$' + value.toString().split('.').join(',');
                             } else {
                                 return 'R$' + value;
@@ -183,7 +183,7 @@ export class DashboardComparativoComponent implements OnInit {
                     // stepValue: 5,
                     min: 0,
                     callback: function (value, index, values) {
-                        if (parseInt(value) >= 1000) {
+                        if (value >= 1000) {
                             return 'R$' + value.toString().split('.').join(',');
                         } else {
                             return 'R$' + value;

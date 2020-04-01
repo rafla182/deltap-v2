@@ -120,7 +120,7 @@ export class DashboardVolumeComponent implements OnInit {
                         // stepValue: 20,
                         min: 0,
                         callback: function (value, index, values) {
-                            if (parseInt(value) >= 1000) {
+                            if (value >= 1000) {
                                 return 'R$' + value.toString().split('.').join(',');
                             } else {
                                 return 'R$' + value;
