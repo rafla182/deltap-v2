@@ -56,7 +56,7 @@ export class SimularAcessoComponent implements OnInit {
     carregarEmpresas() {
         this.empresasService.carregar().subscribe(
             sucesso => {
-                this.empresas = sucesso;
+                this.empresas = sucesso.resultado;
                 if (this.model) {
                     if (this.model.loja) {
                         if (this.model.loja.id > 0) {
@@ -80,7 +80,7 @@ export class SimularAcessoComponent implements OnInit {
     carregarLojas(value) {
         this.lojasService.carregarPorEmpresa(value).subscribe(
             sucesso => {
-                this.lojas = sucesso;
+                this.lojas = sucesso.resultado;
                 if (this.model) {
                     if (this.model.loja) {
                         if (this.model.loja.id > 0) {

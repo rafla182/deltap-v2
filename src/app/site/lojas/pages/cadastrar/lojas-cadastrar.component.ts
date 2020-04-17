@@ -76,7 +76,7 @@ export class LojasCadastrarComponent {
     carregarEmpresas() {
         this.empresasService.carregar().subscribe(
             sucesso => {
-                this.empresas = sucesso;
+                this.empresas = sucesso.resultado;
                 if (this.model) {
                     if (this.model.empresa) {
                         this.empresaSelecionada.id = this.model.empresa.id;

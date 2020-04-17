@@ -205,10 +205,9 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log("aqui");
+
         this.usuario = this.usuarioService.carregar();
         this.lojas = this.usuario.lojas;
-
         this.lojaSelecionada = this.lojas[0];
         this.metaLoja = this.lojaSelecionada.metaMensal;
 
@@ -360,6 +359,8 @@ export class DashboardComponent implements OnInit {
     }
 
     selecionarLoja(event) {
+        console.log(this.lojas);
+
         this.lojaSelecionada = this.lojas.find(p => (p.id === parseInt(event.target.value)) || (p.id === event.target.value));
         this.metaLoja = this.lojaSelecionada.metaMensal > 0 ? this.lojaSelecionada.metaMensal : 0;
         this.vendaDiariaPorLojaData = [];

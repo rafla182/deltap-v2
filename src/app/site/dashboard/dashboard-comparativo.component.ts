@@ -174,7 +174,7 @@ export class DashboardComparativoComponent implements OnInit {
             }
         },
         responsive: true,
-        maintainAspectRatio: false, 
+        maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 ticks: {
@@ -786,14 +786,17 @@ export class DashboardComparativoComponent implements OnInit {
                 const color = this.getRandomColor(colors);
                 const data = response.resultado.find(x => x.vendedor === p);
 
-                // this.acumuladoValorVendasPorFuncionarioDados.push({
-                //     valor: data.valor,
-                //     vendedor: data.vendedor,
-                //     color: color,
-                //     porcentagem: (parseFloat(data.valor) * 100 /
-                //         (this.acumuladoValorVendasPorFuncionarioData[0].data
-                //             .reduce((sum, current) => parseFloat(sum) + parseFloat(current)))).toFixed(2)
-                // });
+                const reducer = (sum, current) => parseFloat(sum) + parseFloat(current);
+                var array = this.acumuladoValorVendasPorFuncionarioData[0].data as Array<any>;
+
+                this.acumuladoValorVendasPorFuncionarioDados.push({
+                    valor: data.valor,
+                    vendedor: data.vendedor,
+                    color: color,
+                    porcentagem: (parseFloat(data.valor) * 100 /
+                        (array.reduce(reducer))).toFixed(2)
+
+                });
 
                 colors.push(color);
             });

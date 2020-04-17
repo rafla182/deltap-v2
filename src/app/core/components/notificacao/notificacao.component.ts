@@ -40,7 +40,7 @@ export class NotificacaoComponent implements OnInit {
         this.notificacaoService.novas()
             .subscribe(
                 sucesso => {
-                    this.notificacao.novas = sucesso;
+                    this.notificacao.novas = sucesso.resultado;
                 })
     }
 

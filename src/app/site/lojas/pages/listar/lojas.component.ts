@@ -108,8 +108,8 @@ export class LojasComponent implements OnInit {
     carregarEmpresas() {
         this.empresasService.carregar().subscribe(
             sucesso => {
-                this.empresas = sucesso;
-                this.empresasFilter = sucesso;
+                this.empresas = sucesso.resultado;
+                this.empresasFilter = sucesso.resultado;
 
                 this.empresaSelecionada.id = 0;
                 this.empresaFilterSelecionada.id = 0;
@@ -145,7 +145,7 @@ export class LojasComponent implements OnInit {
     list() {
         this.lojaService.carregar().subscribe(
             sucesso => {
-                this.model.lojas = sucesso;
+                this.model.lojas = sucesso.resultado;
             });
     }
 

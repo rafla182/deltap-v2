@@ -70,7 +70,7 @@ export class VendedoresComponent implements OnInit {
         this.lojaSelecionada = this.lojas.find(p => p.id === parseInt(event.target.value));
 
         this.vendedorService.carregar(event.target.value).subscribe(sucesso => {
-            this.model.vendedores = sucesso;
+            this.model.vendedores = sucesso.resultado;
             this.modelCadastrar.loja.id = this.lojaSelecionada.id;
         },
             erro => {
@@ -123,7 +123,7 @@ export class VendedoresComponent implements OnInit {
         this.vendedorService.carregar(this.lojaSelecionada.id).subscribe(
             sucesso => {
                 console.log(sucesso);
-                this.model.vendedores = sucesso.sucesso;
+                this.model.vendedores = sucesso.resultado;
             });
 
     }

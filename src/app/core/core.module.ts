@@ -18,6 +18,7 @@ import { AdministradorGuard } from './guards/administrado.guard';import { Usuari
 import { DefaultLayoutComponent } from '../default-layout';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         AppSidebarModule,
         BsDatepickerModule.forRoot(),
         PerfectScrollbarModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        ToastrModule.forRoot()
     ],
     declarations: [
         ClickOutsideDirective,
@@ -85,7 +87,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
         DateFormatPipe,
         DateFormatPipeHour,
         BsDatepickerModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        ToastrModule
     ]
 })
 export class CoreModule { }

@@ -6,7 +6,7 @@
             Você está visualizando as estatísticas da loja:
           </div>
           <div class="col-md-3 col-sm-3">
-            <select class="form-control" [(ngModel)]="lojaSelecionada.id" [ngModelOptions]="{standalone: true}"
+            <select class="form-control"
               (change)="selecionarLoja($event)">
               <option *ngFor="let loja of lojas" [value]="loja.id">{{loja.nome}}</option>
             </select>

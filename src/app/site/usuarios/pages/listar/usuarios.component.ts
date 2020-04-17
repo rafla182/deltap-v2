@@ -91,7 +91,7 @@ export class UsuariosComponent {
     carregarEmpresas() {
         this.empresasService.carregar().subscribe(
             sucesso => {
-                this.empresas = sucesso;
+                this.empresas = sucesso.resultado;
                 this.empresaSelecionada.id = 0;
             },
             erro => {
@@ -109,7 +109,7 @@ export class UsuariosComponent {
             this.selectedItems = [];
             this.lojasService.carregarPorEmpresa(value).subscribe(
                 sucesso => {
-                    this.lojas = sucesso;
+                    this.lojas = sucesso.resultado;
                     this.dropdownList = this.lojas.map(p => {
                         return {
                             id: p.id,
